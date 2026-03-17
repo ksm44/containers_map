@@ -1,6 +1,6 @@
-// TODO: write your code here
-import sum from './basic';
+import ErrorRepository from './errorRepo';
 
-console.log('worked');
+const errorRepo = new ErrorRepository(25, 'Проблемка с номером 25');
 
-console.log(sum([1, 2]));
+errorRepo.translate(25);
+errorRepo.translate(33);

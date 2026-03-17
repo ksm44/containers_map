@@ -1,7 +1,22 @@
-import sum from '../basic';
+import ErrorRepository from '../errorRepo';
 
-test('should sum', () => {
-  const result = sum([1, 2, 3]);
+describe('ErrorRepository class', () => {
+  let errorRepo;
 
-  expect(result).toBe(6);
+  // Создаем новый репозиторий ошибок при каждом тесте
+  beforeEach(() => {
+    errorRepo = new ErrorRepository(65, 'Проблемка с номером 65');
+  });
+
+  test('should create correct map', () => {
+    expect(errorRepo.collection).toBeInstanceOf(Map);
+    expect(errorRepo.collection.has(65)).toBe(true);
+    expect(errorRepo.collection.get(65)).toBe('Проблемка с номером 65');
+  });
+
+  test('translate should to give error description', () => {
+    expect(errorRepo.translate(65)).toBe('Проблемка с номером 65');
+    expect(errorRepo.translate(66)).toBe('Unknown error');
+  });
+
 });
